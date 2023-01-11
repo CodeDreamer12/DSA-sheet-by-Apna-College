@@ -1,0 +1,29 @@
+static void insert(TrieNode root, String key) 
+{
+    for(int i=0; i<key.length(); i++){
+        int idx=key.charAt(i)-'a';
+        if(root.children[idx]==null){
+            root.children[idx]=new TrieNode();
+        }
+        if(i==key.length()-1){
+            root.children[idx].isEndOfWord=true;
+        }
+        root=root.children[idx];
+    }
+}
+
+//Function to use TRIE data structure and search the given string.
+static boolean search(TrieNode root, String key)
+{
+    for(int i=0; i<key.length(); i++){
+        int idx=key.charAt(i)-'a';
+        if(root.children[idx]==null){
+            return false;
+        }
+        if(i==key.length()-1 && root.children[idx].isEndOfWord==false){
+            return false;
+        }
+        root=root.children[idx];
+    }
+    return true;
+}
